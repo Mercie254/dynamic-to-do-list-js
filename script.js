@@ -1,17 +1,21 @@
+// Run when the page finishes loading
 document.addEventListener("DOMContentLoaded", function () {
+    // Select elements
     const addButton = document.getElementById("add-task-btn");
     const taskInput = document.getElementById("task-input");
     const taskList = document.getElementById("task-list");
 
+    // Add task function
     function addTask() {
         const taskText = taskInput.value.trim();
 
+        // If input is empty, show alert
         if (taskText === "") {
             alert("Please enter a task.");
             return;
         }
 
-        // Create <li> and set textContent (per spec)
+        // Create li and set textContent
         const li = document.createElement("li");
         li.textContent = taskText;
 
@@ -20,28 +24,29 @@ document.addEventListener("DOMContentLoaded", function () {
         removeBtn.textContent = "Remove";
         removeBtn.className = "remove-btn";
 
-        // Add onclick handler to remove task
+        // Set onclick event to remove task
         removeBtn.onclick = function () {
             taskList.removeChild(li);
         };
 
-        // Append remove button to li
-        li.appendChild(removeBtn); // Must be AFTER setting textContent
-
-        // Append the li to the list
+        // Append button to li, then li to task list
+        li.appendChild(removeBtn);
         taskList.appendChild(li);
 
-        // Clear the input field
+        // Clear input field
         taskInput.value = "";
     }
 
-    // Click event
+    // Attach event listener to button
     addButton.addEventListener("click", addTask);
 
-    // Enter key event
+    // Attach event listener to input for Enter key
     taskInput.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             addTask();
         }
     });
+
+    // 🚨 This is the part you were missing: call addTask() on page load
+    addTask();
 });
