@@ -42,6 +42,5 @@ document.addEventListener("DOMContentLoaded", function () {
             addTask();
         }
     });
-
-    // ✅ Only attach event listeners — do not call addTask() automatically
+    // Only attach event listeners — do not call addTask() automatically
 });
